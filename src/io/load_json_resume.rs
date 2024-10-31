@@ -5,7 +5,7 @@ pub fn load_json_resume(path: &PathBuf) -> Result<json_resume::Resume, Box<dyn E
     let contents = fs::read_to_string(path)?;
     let resume_data = match path.extension().unwrap().to_str() {
         Some("json") => serde_json::from_str(&contents)?,
-        Some("yaml") | Some("yml") => serde_yaml::from_str(&contents)?,
+        Some("yaml") | Some("yml") => serde_yaml_ng::from_str(&contents)?,
         _ => Err(format!(
             "Unsupported file extension: {:?}",
             path.extension()
