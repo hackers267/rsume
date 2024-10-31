@@ -3,17 +3,22 @@ use minijinja::context;
 
 use crate::{
     templates::{
-        coruscant::publication::publication_wrapper::build_publication_wrapper, template::Template,
+        coruscant::{
+            basics::basics_box::build_basics_wrapper, book::book_wrapper::build_book,
+            education::education_wrapper::build_education_wrapper,
+            project::project_wrapper::build_project_wrapper,
+            publication::publication_wrapper::build_publication_wrapper,
+            summary::summary_wrapper::build_summary_wrapper,
+            work::work_wrapper::build_work_wrapper,
+        },
+        template::Template,
     },
     GloballySupportedLanguages,
 };
 
 use super::{
-    basics::basics_box::build_basics_wrapper,
     data_model::supported_resume_data::SupportedResumeData,
-    education::education_wrapper::build_education_wrapper,
     shared::render_template::render_template, supported_languages::SupportedLanguages,
-    work::work_wrapper::build_work_wrapper,
 };
 
 /// A modern, minimalist, and professional resume design.
@@ -42,7 +47,10 @@ impl Template for Coruscant {
                 basics => build_basics_wrapper(&self.resume_data, &self.language),
                 work => build_work_wrapper(&self.resume_data, &self.language),
                 education => build_education_wrapper(&self.resume_data, &self.language),
-                publications => build_publication_wrapper(&self.resume_data, &self.language)
+                publications => build_publication_wrapper(&self.resume_data, &self.language),
+                project => build_project_wrapper(&self.resume_data,&self.language),
+                summary => build_summary_wrapper(&self.resume_data,&self.language),
+                book => build_book(&self.resume_data, &self.language)
             ),
         );
 

@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.18", features = ["derive"] }
 headless_chrome = "1.0.15"
-json-resume = "0.2.0"
+json-resume = { git = "https://github.com/hackers267/json-resume.git", branch = "main" }
 minijinja = "2.3.1"
 serde = "1.0.210"
 serde_json = "1.0.128"

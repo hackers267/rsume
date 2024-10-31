@@ -1,3 +1,5 @@
+use json_resume::Project;
+
 use super::{
     basics::Basics, education::Education, language::Language, publication::Publication,
     utils::get_mandatory_field, work::Work,
@@ -12,6 +14,8 @@ pub struct SupportedResumeData {
     pub work: Vec<Work>,
     pub education: Vec<Education>,
     pub publications: Vec<Publication>,
+    pub projects: Vec<Project>,
+    pub references: Vec<String>,
 }
 impl SupportedResumeData {
     pub fn try_from(resume_data: json_resume::Resume) -> Result<Self, String> {
@@ -44,6 +48,13 @@ impl SupportedResumeData {
                 .publications
                 .into_iter()
                 .map(|publication| Publication::try_from(publication).unwrap())
+                .collect(),
+            projects: resume_data.projects.into_iter().collect(),
+            references: resume_data
+                .references
+                .iter()
+                .filter_map(|r| r.name.as_ref())
+                .cloned()
                 .collect(),
         })
     }

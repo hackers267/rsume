@@ -4,21 +4,22 @@
 
   color: black;
   font-family: 'Verdana';
-  font-size: 14pt;
+  font-size: 14px;
 }
 
 @page {
   margin-top: 3%;
 }
+
 @page :first {
   margin-top: 0;
 }
 
 .default-box {
   background-color: white;
-  border-radius: 15pt;
-  box-shadow: 0 0 25pt rgb(220, 220, 220);
-  padding: 20pt;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgb(220, 220, 220);
+  padding: 20px;
 }
 
 .basics-box {
@@ -30,13 +31,13 @@
 
 .basics-wrapper {
   display: grid;
-  gap: 10pt;
+  gap: 10px;
   grid-template-columns: auto 1fr auto;
 }
 
 .profile-image img {
-  width: 80pt;
-  height: 80pt;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   grid-column: 1;
 }
@@ -47,19 +48,19 @@
 }
 
 .name {
-  font-size: 24pt;
+  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10pt;
+  margin-bottom: 10px;
 }
 
 .label {
-  font-size: 16pt;
+  font-size: 16px;
 }
 
 .contact-info {
   display: grid;
   grid-column: 3;
-  gap: 5pt;
+  gap: 5px;
   align-items: center;
 }
 
@@ -67,15 +68,15 @@
 .email-icon,
 .phone-icon,
 .address-icon {
-  width: 17pt;
-  height: 17pt;
+  width: 17px;
+  height: 17px;
 }
 
 .email {
   grid-row: 1;
   grid-column: 2;
 
-  font-size: 12pt;
+  font-size: 12px;
 }
 
 .phone-icon {
@@ -87,7 +88,7 @@
   grid-row: 2;
   grid-column: 2;
 
-  font-size: 12pt;
+  font-size: 12px;
 }
 
 .address-icon {
@@ -99,24 +100,23 @@
   grid-row: 3;
   grid-column: 2;
 
-  font-size: 12pt;
+  font-size: 12px;
 }
 
 .section-title {
-  margin-top: 15pt;
-  margin-left: 125pt;
-
-  font-size: 18pt;
+  margin-top: 15px;
+  margin-left: 50px;
+  font-size: 18px;
 }
 
 .skills-and-languages-wrapper {
-  margin-top: 25pt;
-  
+  margin-top: 25px;
+
   display: grid;
   grid-template-columns: 33% 66%;
-  column-gap: 30pt;
-  
-  font-size: 12pt;
+  column-gap: 30px;
+
+  font-size: 12px;
 }
 
 .languages-wrapper {
@@ -124,8 +124,8 @@
 
   display: grid;
   grid-template-columns: auto 1fr auto;
-  column-gap: 10pt;
-  row-gap: 15pt;
+  column-gap: 10px;
+  row-gap: 15px;
   align-items: center;
   height: fit-content;
 }
@@ -142,15 +142,15 @@
 .progress-bar {
   grid-column: 2;
 
-  height: 5pt;
-  border-radius: 5pt;
+  height: 5px;
+  border-radius: 5px;
   background-color: #e0e0e0;
 }
 
 .progress {
-  height: 5pt;
+  height: 5px;
   background-color: black;
-  border-radius: 5pt;
+  border-radius: 5px;
 }
 
 .language-fluency {
@@ -163,43 +163,61 @@
 
 .skills-title {
   width: 100%;
-  margin-bottom: 4pt;
+  margin-bottom: 4px;
 }
 
 .skill {
   width: fit-content;
-  height: 20pt;
-  margin-top: 5.5pt;
+  height: 20px;
+  margin-top: 5.5px;
 
-  padding-left: 10pt;
-  padding-right: 10pt;
-  padding-top: 4pt;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
 
-  border-radius: 20pt;
+  border-radius: 20px;
   background-color: #e0e0e0;
   display: inline-block;
 }
 
 
 .entry {
-  padding-top: 16pt;
+  padding-top: 16px;
   padding-left: 2.5%;
   padding-right: 2.5%;
 }
 
 .entry-inner {
   display: grid;
-  grid-template-columns: 1fr auto 82.5%;
-  gap: 5pt;
+  grid-template-columns: 1fr auto 90%;
+  gap: 5px;
 
-  font-size: 12pt;
+  font-size: 12px;
   break-inside: avoid;
   break-after: auto;
 }
 
 .entry-inner ul {
-  margin-top: 5pt;
+  margin-top: 5px;
   margin-bottom: 0;
+}
+
+.entry-keyword {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.entry-keyword li {
+  width: fit-content;
+  height: 20px;
+  margin-top: 5.5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  display: inline-block;
 }
 
 .timespan-column {
@@ -208,15 +226,15 @@
   text-align: right;
   position: relative;
 
-  margin-top: 12pt;
-  margin-bottom: 12pt;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .end-date {
   position: absolute;
   top: 0;
   right: 0;
-  min-width: 75pt;
+  min-width: 75px;
 }
 
 .singular-date {
@@ -231,20 +249,21 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  min-width: 75pt;
+  min-width: 75px;
 }
 
 .timeline {
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-content: center;
-  padding-top: 16pt;
-  padding-bottom: 15pt;
+  padding-top: 16px;
+  padding-bottom: 15px;
 }
 
-.top-circle, .bottom-circle {
-  width: 8pt;
-  height: 8pt;
+.top-circle,
+.bottom-circle {
+  width: 8px;
+  height: 8px;
   background-color: black;
   border-radius: 50%;
   z-index: 1;
@@ -256,13 +275,13 @@
 }
 
 .line {
-  margin-top: 3pt;
-  margin-bottom: 3pt;
-  margin-left: 3.25pt;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3.25px;
 
   grid-row: 1/4;
   grid-column: 1;
-  width: 1.5pt;
+  width: 1.5px;
   background-color: black;
   z-index: 1;
 }
@@ -277,18 +296,62 @@
   height: fit-content;
 
   background-color: white;
-  border-radius: 15pt;
-  box-shadow: -5pt 0 20pt rgb(220, 220, 220);
-  padding: 12pt;
+  border-radius: 15px;
+  box-shadow: -5px 0 20px rgb(220, 220, 220);
+  padding: 12px;
+}
+
+.entry-label {
+  margin-block-start: 10px;
+  font-weight: bold;
+}
+
+.entry-desc {
+  text-indent: 2em;
 }
 
 .entry-title {
   font-weight: bold;
-
-  margin-bottom: 10pt;
+  font-size: 16px;
+  margin-bottom: 10px;
   align-content: start;
 }
 
 .entry-footer {
   margin-top: 10pt;
+}
+
+.feature-title {
+  font-weight: bold;
+  margin-top: 8px;
+  text-indent: .7em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.open-source {
+  margin-block-start: 16px;
+  font-size: 12px;
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.book-list li {
+  width: fit-content;
+  height: 20px;
+  margin-top: 5.5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  display: inline-block;
+  text-indent: 0;
 }

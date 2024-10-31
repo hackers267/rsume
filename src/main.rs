@@ -92,12 +92,15 @@ pub enum GloballySupportedLanguages {
     EN,
     /// German
     DE,
+    /// Chinese
+    CN,
 }
 impl GloballySupportedLanguages {
     /// Try constructing a this struct from a string.
     pub fn try_from(language_string: String) -> Result<Self, String> {
         match language_string.to_lowercase().as_str() {
             "english" | "en" => Ok(GloballySupportedLanguages::EN),
+            "chinese" | "cn" => Ok(GloballySupportedLanguages::CN),
             "deutsch" | "german" | "de" => Ok(GloballySupportedLanguages::DE),
             _ => Err(format!("{language_string} is not a supported language.")),
         }
