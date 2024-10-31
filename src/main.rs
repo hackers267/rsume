@@ -2,6 +2,7 @@ mod io;
 mod templates;
 
 use std::error::Error;
+use std::fs;
 use std::path::PathBuf;
 
 use crate::io::load_json_resume::load_json_resume;
@@ -66,8 +67,14 @@ pub fn generate_pdf(
     };
 
     let html_resume = template.build();
+    save_to_html(&html_resume)?;
     save_to_pdf(html_resume, &target_path)?;
 
+    Ok(())
+}
+
+fn save_to_html(html: &String) -> Result<(), Box<dyn Error>> {
+    fs::write("resume.html", html)?;
     Ok(())
 }
 

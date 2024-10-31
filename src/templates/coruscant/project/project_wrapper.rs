@@ -142,10 +142,14 @@ fn build_entry_duty(project_entry: &Project) -> String {
     entry_body
 }
 fn build_entry_feature(entry: &Project) -> String {
+    let features = &entry.features;
+    if features.is_empty() {
+        return String::new();
+    }
     let mut entry_body = String::new();
     entry_body.push_str("<div class='entry-label'>经典案例</div>");
 
-    for feature in &entry.features {
+    for feature in features {
         let Feature {
             situation,
             task,
