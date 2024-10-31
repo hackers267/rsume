@@ -12,7 +12,7 @@ An instance of Google Chrome or Chromedriver is required for executing the progr
 ## Usage
 `rsume`should be used from the command line like this:
 ```bash
-rsume /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"
+rsume gen /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"
 ```
 The `--template` and `--language` options are optional.
 

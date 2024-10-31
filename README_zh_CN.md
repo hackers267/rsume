@@ -12,7 +12,7 @@
 ## 使用方法
 `rsume` 应该像这样从命令行使用：
 ```bash
-rsume /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"
+rsume gen /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"
 ```
 `--template` 和 `--language` 选项是可选的。
 
