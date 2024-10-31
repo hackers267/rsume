@@ -9,6 +9,7 @@ use crate::{
     templates::Coruscant,
 };
 use clap::{Parser, Subcommand};
+use io::new;
 use std::{fs, path::PathBuf};
 use templates::template::Template;
 
@@ -23,6 +24,7 @@ pub struct Args {
 #[derive(Debug, Subcommand)]
 enum Commands {
     Init,
+    New,
     Gen {
         /// Path to the data describing your resume. It needs to comply with theJSONResume schema (see https://jsonresume.org/).
         resume_data_path: PathBuf,
@@ -43,7 +45,7 @@ enum Commands {
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     match args.command {
-        Commands::Init => init(),
+        Commands::Init | Commands::New => new::new(),
         Commands::Gen {
             resume_data_path,
             target_path,
@@ -68,12 +70,6 @@ fn main() -> anyhow::Result<()> {
             Ok(())
         }
     }
-}
-
-fn init() -> anyhow::Result<()> {
-    let string = include_str!("source.yaml");
-    fs::write("resume.yaml", string)?;
-    Ok(())
 }
 
 /// Generate a resume and save it as a PDF.
