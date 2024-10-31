@@ -23,3 +23,6 @@ opt-level = "z"
 strip = true
 codegen-units = 1
 panic = "abort"
+
+[profile.dev]
+debug = 0
