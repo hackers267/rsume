@@ -1,10 +1,10 @@
-use std::{error::Error, fs, path::PathBuf};
+use std::{fs, path::PathBuf};
 
 use headless_chrome::{types::PrintToPdfOptions, Browser};
 use tempfile::TempDir;
 
 /// Save the resume design into a PDF.
-pub fn save_to_pdf(html_resume: String, target_path: &PathBuf) -> Result<(), Box<dyn Error>> {
+pub fn save_to_pdf(html_resume: String, target_path: &PathBuf) -> anyhow::Result<()> {
     let tmp_dir = TempDir::new()?;
     let tmp_storage_path = tmp_dir.path().join("resume.html");
     fs::write(&tmp_storage_path, html_resume)?;

@@ -1,0 +1,100 @@
+basics:
+  # 姓名
+  name: 
+  # 职位
+  label: 
+  # 照片
+  image: 
+  # 电子邮箱
+  email: 
+  # 联系电话
+  phone: 
+  # 个人评价
+  summary: 
+  # 个人社交网站
+  profiles:
+    # 网站名称
+    - network: 
+      # 网站地址
+      url: 
+      # 用户名
+      username: 
+  # 住址
+  location:
+    # 地址
+    address: 
+    # 邮编
+    postalCode: 
+    # 城市
+    city: 
+    # 国家编码
+    countryCode: 
+# 语言
+languages:
+  # 语言名称
+  - language: 
+    # 熟练度
+    fluency: 
+# 读过的书籍
+references:
+  # 书籍名称
+  - name: 
+# 技术
+skills:
+  # 技术名称
+  - name: 
+# 工作经历
+work:
+  # 公司名称
+  - name: 
+    # 职位描述
+    description: 
+    # 开始日期
+    startDate: 
+    # 结束日期
+    endDate: 
+    # 主要职责和成熟
+    highlights:
+      - 
+
+# 教育经历
+education:
+  # 学校
+  - institution: 
+    # 开始时间
+    startDate: 
+    # 结束时间
+    endDate: 
+    studyType: 
+    # 领域
+    area: 
+# 项目经历
+projects:
+  # 项目名称
+  - name: 
+    # 项目描述
+    description: 
+    # 项目亮点
+    highlights:
+      -
+    # 项目职责
+    duties:
+      - 
+    # 项目关键技术和难点
+    keywords:
+      - 
+    # 经典案例
+    features:
+      # 案例名称
+      - name: 
+        # 情景
+        situation: 
+        # 任务
+        task: 
+        # 行动, 可以使用\n分隔
+        action: 
+        # 成果, 可以使用\n分隔
+        result: 
+    # 项目成果列表
+    profits:
+      - 

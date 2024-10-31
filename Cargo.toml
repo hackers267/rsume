@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.91"
 clap = { version = "4.5.18", features = ["derive"] }
 headless_chrome = "1.0.15"
 json-resume = { git = "https://github.com/hackers267/json-resume.git", branch = "main" }
