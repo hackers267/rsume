@@ -66,13 +66,18 @@ struct Profile {
 }
 
 /// 个人住址
-#[derive(Clone, Debug, Serialize, Deserialize, Default)]
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
 #[serde(rename_all = "camelCase")]
-struct Location {
-    address: String,
-    postal_code: String,
-    city: String,
-    coutry_code: String,
+#[builder(pattern = "mutable")]
+pub(super) struct Location {
+    #[builder(default, setter(strip_option))]
+    address: Option<String>,
+    #[builder(default, setter(strip_option))]
+    postal_code: Option<String>,
+    #[builder(default, setter(strip_option))]
+    city: Option<String>,
+    #[builder(default, setter(strip_option))]
+    coutry_code: Option<String>,
 }
 
 /// 语言
