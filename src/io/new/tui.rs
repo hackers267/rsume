@@ -1,11 +1,20 @@
-use super::data::{Basic, BasicBuilder, LocalData, LocalDataBuilder, Location, LocationBuilder};
-use dialoguer::{theme::ColorfulTheme, Input};
+use super::data::{
+    Basic, BasicBuilder, LocalData, LocalDataBuilder, Location, LocationBuilder, Profile,
+    ProfileBuilder,
+};
+use colored::*;
+use dialoguer::{theme::ColorfulTheme, Confirm, Input};
 
 pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
     let basic = get_basic_from_tui()?;
     let data = LocalDataBuilder::default().basic(basic).build().unwrap();
     Ok(data)
 }
+
+fn dialoguer_theme() -> ColorfulTheme {
+    ColorfulTheme::default()
+}
+
 /// Set the filed of builder by the tui input
 ///
 /// # Arguments
@@ -20,16 +29,19 @@ macro_rules! builder_set {
 }
 /// 通过tui获取基础信息数据
 fn get_basic_from_tui() -> anyhow::Result<Basic> {
-    let mut basic_builder = BasicBuilder::default();
-    builder_set!(basic_builder, name, "姓名");
-    builder_set!(basic_builder, label, "职位");
-    builder_set!(basic_builder, email, "电子邮箱");
-    builder_set!(basic_builder, phone, "联系电话");
-    builder_set!(basic_builder, summary, "自我评价");
-    println!("请输入您的个人住址信息:");
+    let mut builder = BasicBuilder::default();
+    builder_set!(builder, name, "姓名");
+    builder_set!(builder, label, "职位");
+    builder_set!(builder, email, "电子邮箱");
+    builder_set!(builder, phone, "联系电话");
+    builder_set!(builder, summary, "自我评价");
+    println!("{}", "请输入您的个人住址信息:".green());
     let location = get_location_from_tui()?;
-    basic_builder.location(location);
-    let basic = basic_builder.build().unwrap();
+    builder.location(location);
+    println!("{}", "请输入您的个人社交信息:".green());
+    let profiles = get_profile_from_tui()?;
+    builder.profiles(profiles);
+    let basic = builder.build().unwrap();
 
     Ok(basic)
 }
@@ -45,6 +57,27 @@ fn get_location_from_tui() -> anyhow::Result<Location> {
     Ok(location)
 }
 
+/// 通过tui获取个人社交网站
+fn get_profile_from_tui() -> anyhow::Result<Vec<Profile>> {
+    let mut profiles = vec![];
+    let theme = dialoguer_theme();
+    loop {
+        let mut builder = ProfileBuilder::default();
+        builder_set!(builder, network, "网站名称");
+        builder_set!(builder, url, "网址");
+        builder_set!(builder, username, "用户名称");
+        let profile = builder.build().unwrap();
+        profiles.push(profile);
+        if !Confirm::with_theme(&theme)
+            .with_prompt("继续添加社交网站?")
+            .interact()
+            .unwrap()
+        {
+            return Ok(profiles);
+        }
+    }
+}
+
 /// The text inputed by user;从input中获取用户输出的数据
 ///
 /// # Arguments
@@ -53,7 +86,8 @@ fn get_location_from_tui() -> anyhow::Result<Location> {
 /// # Return
 /// - The text which is input by user. 用户输入
 fn input_prompt(prompt: &str) -> Result<String, dialoguer::Error> {
-    Input::with_theme(&ColorfulTheme::default())
+    let theme = dialoguer_theme();
+    Input::with_theme(&theme)
         .with_prompt(prompt)
         .interact_text()
 }

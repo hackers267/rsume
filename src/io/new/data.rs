@@ -55,13 +55,17 @@ pub(super) struct Basic {
 }
 
 /// 个人社交网站
-#[derive(Clone, Debug, Serialize, Deserialize)]
-struct Profile {
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
+#[builder(pattern = "mutable")]
+pub(super) struct Profile {
     /// 网站名称
+    #[builder(default, setter(strip_option))]
     network: String,
     /// 网站地址
+    #[builder(default, setter(strip_option))]
     url: String,
     /// 用户名
+    #[builder(default, setter(strip_option))]
     username: String,
 }
 
