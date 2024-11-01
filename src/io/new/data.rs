@@ -14,8 +14,8 @@ pub(super) struct LocalData {
     #[builder(default, setter(strip_option))]
     skill: Vec<Skill>,
     /// 参考,如书籍
-    #[builder(default)]
-    references: Vec<Refernce>,
+    #[builder(default, setter(strip_option))]
+    references: Vec<Reference>,
     /// 工作经历
     #[builder(default)]
     work: Vec<Work>,
@@ -104,10 +104,12 @@ pub(super) struct Skill {
     name: Option<String>,
 }
 /// 参考，如书籍
-#[derive(Clone, Debug, Serialize, Deserialize)]
-struct Refernce {
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
+#[builder(pattern = "mutable")]
+pub(super) struct Reference {
     /// 名称
-    name: String,
+    #[builder(default, setter(strip_option))]
+    name: Option<String>,
 }
 /// 工作经历
 #[derive(Clone, Debug, Serialize, Deserialize)]

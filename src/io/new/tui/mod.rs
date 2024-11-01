@@ -2,11 +2,13 @@ use super::data::{LocalData, LocalDataBuilder};
 use basic::get_basic_from_tui;
 use dialoguer::{theme::ColorfulTheme, Input, Select};
 use language::get_languages_from_tui;
+use reference::get_ref_from_tui;
 use skill::get_skills_from_tui;
 
 #[macro_use]
 mod basic;
 mod language;
+mod reference;
 mod skill;
 
 /// 从tui中获取用户的输入数
@@ -14,10 +16,12 @@ pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
     let basic = get_basic_from_tui()?;
     let languages = get_languages_from_tui()?;
     let skills = get_skills_from_tui()?;
+    let references = get_ref_from_tui()?;
     let data = LocalDataBuilder::default()
         .basic(basic)
         .languages(languages)
         .skill(skills)
+        .references(references)
         .build()
         .unwrap();
     Ok(data)
