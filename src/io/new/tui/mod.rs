@@ -1,12 +1,14 @@
 use super::data::{LocalData, LocalDataBuilder};
 use basic::get_basic_from_tui;
 use dialoguer::{theme::ColorfulTheme, Input, Select};
+use education::get_edu_from_tui;
 use language::get_languages_from_tui;
 use reference::get_ref_from_tui;
 use skill::get_skills_from_tui;
 
 #[macro_use]
 mod basic;
+mod education;
 mod language;
 mod reference;
 mod skill;
@@ -17,11 +19,13 @@ pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
     let languages = get_languages_from_tui()?;
     let skills = get_skills_from_tui()?;
     let references = get_ref_from_tui()?;
+    let educations = get_edu_from_tui()?;
     let data = LocalDataBuilder::default()
         .basic(basic)
         .languages(languages)
         .skill(skills)
         .references(references)
+        .education(educations)
         .build()
         .unwrap();
     Ok(data)

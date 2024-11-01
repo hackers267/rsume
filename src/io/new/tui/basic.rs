@@ -17,7 +17,6 @@ pub(super) fn get_basic_from_tui() -> anyhow::Result<Basic> {
     println!("{}", "请输入您的个人住址信息:".green());
     let location = get_location_from_tui()?;
     builder.location(location);
-    println!("{}", "请输入您的个人社交信息:".green());
     let profiles = get_profile_from_tui()?;
     builder.profiles(profiles);
     let basic = builder.build().unwrap();
@@ -41,6 +40,7 @@ fn get_profile_from_tui() -> anyhow::Result<Vec<Profile>> {
     let mut profiles = vec![];
     let theme = dialoguer_theme();
     loop {
+        println!("{}", "请输入您的个人社交信息:".green());
         let mut builder = ProfileBuilder::default();
         builder_set!(builder, network, "网站名称");
         builder_set!(builder, url, "网址");

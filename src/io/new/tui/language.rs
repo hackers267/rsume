@@ -6,6 +6,7 @@ use crate::{
         tui::select_prompt,
     },
 };
+use colored::Colorize;
 use dialoguer::Confirm;
 
 const LIST: [&str; 5] = ["A", "B", "C", "D", "E"];
@@ -15,9 +16,9 @@ pub(super) fn get_languages_from_tui() -> anyhow::Result<Vec<Language>> {
     let mut result = vec![];
     let theme = dialoguer_theme();
     loop {
+        println!("{}", "添加讲述的语言和熟练度:".green());
         let mut builder = LanguageBuilder::default();
         builder_set!(builder, language, "语言");
-        builder_set!(builder, fluency, "熟练度");
         let index = select_prompt("熟练度", &LIST, 5)?;
         let fluency = LIST.get(index).unwrap();
         builder.fluency(fluency.to_string());

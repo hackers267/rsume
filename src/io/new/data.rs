@@ -112,8 +112,39 @@ pub(super) struct Reference {
     name: Option<String>,
 }
 /// 工作经历
-#[derive(Clone, Debug, Serialize, Deserialize)]
-struct Work {}
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
+#[serde(rename_all = "camelCase")]
+#[builder(pattern = "mutable")]
+pub(super) struct Work {
+    #[builder(default, setter(strip_option))]
+    name: Option<String>,
+    #[builder(default, setter(strip_option))]
+    description: Option<String>,
+    #[builder(default, setter(strip_option))]
+    start_date: Option<String>,
+    #[builder(default, setter(strip_option))]
+    end_date: Option<String>,
+    #[builder(default, setter(strip_option))]
+    highlights: Vec<String>,
+}
 /// 教育经历
-#[derive(Clone, Debug, Serialize, Deserialize)]
-struct Education {}
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
+#[builder(pattern = "mutable")]
+#[serde(rename_all = "camelCase")]
+pub(super) struct Education {
+    /// 学校
+    #[builder(default, setter(strip_option))]
+    institution: Option<String>,
+    /// 开始日期
+    #[builder(default, setter(strip_option))]
+    start_date: Option<String>,
+    /// 结束日期
+    #[builder(default, setter(strip_option))]
+    end_date: Option<String>,
+    /// 学习类型，如全日制，成人教育等
+    #[builder(default, setter(strip_option))]
+    study_type: Option<String>,
+    /// 领域或专业
+    #[builder(default, setter(strip_option))]
+    area: Option<String>,
+}
