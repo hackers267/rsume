@@ -6,13 +6,13 @@ use serde::{Deserialize, Serialize};
 pub(super) struct LocalData {
     /// 基础信息
     #[builder(default, setter(strip_option))]
-    basic: Basic,
+    basics: Basic,
     /// 语言
     #[builder(default, setter(strip_option))]
     languages: Vec<Language>,
     /// 技能
     #[builder(default, setter(strip_option))]
-    skill: Vec<Skill>,
+    skills: Vec<Skill>,
     /// 参考,如书籍
     #[builder(default, setter(strip_option))]
     references: Vec<Reference>,

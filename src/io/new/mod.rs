@@ -1,3 +1,4 @@
+use json_resume::Resume;
 use std::{fs, path::Path};
 use tui::get_data_from_tui;
 
@@ -10,23 +11,30 @@ fn data_file() -> Option<std::path::PathBuf> {
 }
 
 pub fn new() -> anyhow::Result<()> {
-    let string = include_str!("source.yaml");
+    let source = include_str!("source.yaml");
     let data_file = data_file();
     match data_file {
-        // Some(path) if path.exists() => {
-        //     let value = fs::read_to_string(path).unwrap();
-        //     let resume: HashMap<String, String> = serde_yaml_ng::from_str(&value).unwrap();
-        //     println!("resume is {:?}", resume);
-        //     Ok(())
-        // }
+        Some(path) if path.exists() => {
+            let value = fs::read_to_string(path).unwrap();
+            let mut input_resume: Resume = serde_yaml_ng::from_str(&value).unwrap();
+            let source_resume: Resume = serde_yaml_ng::from_str(source).unwrap();
+            input_resume.projects = source_resume.projects;
+            let output = serde_yaml_ng::to_string(&input_resume).unwrap();
+            fs::write("resume.yaml", output)?;
+            Ok(())
+        }
         Some(path) => {
             let data = create_data();
             create_data_file(&path, &data)?;
-            fs::write("resume.yaml", string)?;
+            let mut input_resume: Resume = serde_yaml_ng::from_str(&data).unwrap();
+            let source_resume: Resume = serde_yaml_ng::from_str(source).unwrap();
+            input_resume.projects = source_resume.projects;
+            let output = serde_yaml_ng::to_string(&input_resume).unwrap();
+            fs::write("resume.yaml", output)?;
             Ok(())
         }
         None => {
-            fs::write("resume.yaml", string)?;
+            fs::write("resume.yaml", source)?;
             Ok(())
         }
     }
@@ -39,12 +47,12 @@ fn create_data() -> String {
 }
 
 /// 创建基础文件
-fn create_data_file(path: &Path, content: &str) -> anyhow::Result<()> {
+fn create_data_file<'a>(path: &Path, content: &'a str) -> anyhow::Result<&'a str> {
     let dir = path.parent();
     if let Some(dir) = dir {
         if fs::create_dir_all(dir).is_ok() {
-            fs::write(path, content)?
+            fs::write(path, content)?;
         }
     }
-    Ok(())
+    Ok(content)
 }

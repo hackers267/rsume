@@ -24,9 +24,9 @@ pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
     let educations = get_edu_from_tui()?;
     let work = get_work_from_tui()?;
     let data = LocalDataBuilder::default()
-        .basic(basic)
+        .basics(basic)
         .languages(languages)
-        .skill(skills)
+        .skills(skills)
         .references(references)
         .education(educations)
         .work(work)
