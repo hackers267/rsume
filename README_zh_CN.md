@@ -10,6 +10,17 @@
 执行程序需要一个 Google Chrome 或 Chromedriver 的实例。
 
 ## 使用方法
+
+### 初始化公同内容
+
+在我们初次使用的时候，我们可以通过命令初始化一个公同内容：
+
+```bash
+rsume init
+```
+
+### 生成简历
+
 `rsume` 应该像这样从命令行使用：
 ```bash
 rsume gen /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"

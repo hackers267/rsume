@@ -10,6 +10,12 @@ Currently, the only supported method for installing this program is by downloadi
 An instance of Google Chrome or Chromedriver is required for executing the program.
 
 ## Usage
+
+Use the below command to generate some common thing:
+```bash
+rsume init
+```
+
 `rsume`should be used from the command line like this:
 ```bash
 rsume gen /path/to/resume_data.yaml /target/path.pdf --template "coruscant" --language "english"
