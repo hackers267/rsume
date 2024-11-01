@@ -10,7 +10,10 @@ use crate::{
 };
 use clap::{Parser, Subcommand};
 use io::new;
-use std::{fs, path::PathBuf};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 use templates::template::Template;
 
 /// Program for generating a resume from JSONResume data.
@@ -72,7 +75,7 @@ fn main() -> anyhow::Result<()> {
     }
 }
 
-/// Generate a resume and save it as a PDF.
+/// Generate a resume and save it as a html and a PDF.
 pub fn generate_pdf(
     resume_data_path: PathBuf,
     target_path: PathBuf,
@@ -90,14 +93,15 @@ pub fn generate_pdf(
     };
 
     let html_resume = template.build();
-    save_to_html(&html_resume)?;
+    save_to_html(&html_resume, &target_path)?;
     save_to_pdf(html_resume, &target_path)?;
 
     Ok(())
 }
 
-fn save_to_html(html: &String) -> anyhow::Result<()> {
-    fs::write("resume.html", html)?;
+fn save_to_html(html: &String, target_path: &Path) -> anyhow::Result<()> {
+    let target = target_path.with_extension("html");
+    fs::write(target, html)?;
     Ok(())
 }
 
