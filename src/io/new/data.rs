@@ -9,7 +9,7 @@ pub(super) struct LocalData {
     basic: Basic,
     /// 语言
     #[builder(default, setter(strip_option))]
-    languages: Language,
+    languages: Vec<Language>,
     /// 技能
     #[builder(default, setter(strip_option))]
     skill: Vec<Skill>,
@@ -85,12 +85,15 @@ pub(super) struct Location {
 }
 
 /// 语言
-#[derive(Clone, Debug, Serialize, Deserialize, Default)]
-struct Language {
+#[derive(Clone, Debug, Serialize, Deserialize, Default, Builder)]
+#[builder(pattern = "mutable")]
+pub(super) struct Language {
     /// 语言名称
-    language: String,
+    #[builder(default, setter(strip_option))]
+    language: Option<String>,
     /// 熟练度
-    fluency: String,
+    #[builder(default, setter(strip_option))]
+    fluency: Option<String>,
 }
 /// 技能
 #[derive(Clone, Debug, Serialize, Deserialize)]

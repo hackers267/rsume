@@ -1,34 +1,13 @@
-use super::data::{
-    Basic, BasicBuilder, LocalData, LocalDataBuilder, Location, LocationBuilder, Profile,
-    ProfileBuilder,
+use super::{dialoguer_theme, input_prompt};
+use crate::{
+    builder_set,
+    io::new::data::{Basic, BasicBuilder, Location, LocationBuilder, Profile, ProfileBuilder},
 };
-use colored::*;
-use dialoguer::{theme::ColorfulTheme, Confirm, Input};
+use colored::Colorize;
+use dialoguer::Confirm;
 
-pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
-    let basic = get_basic_from_tui()?;
-    let data = LocalDataBuilder::default().basic(basic).build().unwrap();
-    Ok(data)
-}
-
-fn dialoguer_theme() -> ColorfulTheme {
-    ColorfulTheme::default()
-}
-
-/// Set the filed of builder by the tui input
-///
-/// # Arguments
-/// - **builder** builder entiry builder实体
-/// - **filed** The filed which be set. 需要设置的字段
-/// - **prompt** The prompt which remind user to input. 输出提示语
-macro_rules! builder_set {
-    ($builder:expr,$filed:ident,$prompt:expr) => {
-        let value: String = input_prompt($prompt).unwrap();
-        $builder.$filed(value);
-    };
-}
 /// 通过tui获取基础信息数据
-fn get_basic_from_tui() -> anyhow::Result<Basic> {
+pub(super) fn get_basic_from_tui() -> anyhow::Result<Basic> {
     let mut builder = BasicBuilder::default();
     builder_set!(builder, name, "姓名");
     builder_set!(builder, label, "职位");
@@ -76,18 +55,4 @@ fn get_profile_from_tui() -> anyhow::Result<Vec<Profile>> {
             return Ok(profiles);
         }
     }
-}
-
-/// The text inputed by user;从input中获取用户输出的数据
-///
-/// # Arguments
-/// - prompt The prompt which tell user to input what; 用户提示语
-///
-/// # Return
-/// - The text which is input by user. 用户输入
-fn input_prompt(prompt: &str) -> Result<String, dialoguer::Error> {
-    let theme = dialoguer_theme();
-    Input::with_theme(&theme)
-        .with_prompt(prompt)
-        .interact_text()
 }

@@ -2,6 +2,7 @@ use std::{fs, path::Path};
 use tui::get_data_from_tui;
 
 mod data;
+#[macro_use]
 mod tui;
 
 fn data_file() -> Option<std::path::PathBuf> {
