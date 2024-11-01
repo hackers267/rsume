@@ -81,7 +81,7 @@ pub(super) struct Location {
     #[builder(default, setter(strip_option))]
     city: Option<String>,
     #[builder(default, setter(strip_option))]
-    coutry_code: Option<String>,
+    country_code: Option<String>,
 }
 
 /// 语言

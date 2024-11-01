@@ -30,7 +30,7 @@ fn get_location_from_tui() -> anyhow::Result<Location> {
     builder_set!(location_builder, address, "地址");
     builder_set!(location_builder, postal_code, "邮政编码");
     builder_set!(location_builder, city, "城市");
-    builder_set!(location_builder, coutry_code, "图家编码");
+    builder_set!(location_builder, country_code, "图家编码");
     let location = location_builder.build()?;
     Ok(location)
 }
