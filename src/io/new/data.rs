@@ -96,10 +96,12 @@ pub(super) struct Language {
     fluency: Option<String>,
 }
 /// 技能
-#[derive(Clone, Debug, Serialize, Deserialize)]
-struct Skill {
+#[derive(Clone, Debug, Serialize, Deserialize, Builder)]
+#[builder(pattern = "mutable")]
+pub(super) struct Skill {
     /// 名称
-    name: String,
+    #[builder(default, setter(strip_option))]
+    name: Option<String>,
 }
 /// 参考，如书籍
 #[derive(Clone, Debug, Serialize, Deserialize)]
