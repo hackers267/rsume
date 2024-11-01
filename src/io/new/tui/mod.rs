@@ -5,6 +5,7 @@ use education::get_edu_from_tui;
 use language::get_languages_from_tui;
 use reference::get_ref_from_tui;
 use skill::get_skills_from_tui;
+use work::get_work_from_tui;
 
 #[macro_use]
 mod basic;
@@ -12,6 +13,7 @@ mod education;
 mod language;
 mod reference;
 mod skill;
+mod work;
 
 /// 从tui中获取用户的输入数
 pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
@@ -20,12 +22,14 @@ pub(super) fn get_data_from_tui() -> anyhow::Result<LocalData> {
     let skills = get_skills_from_tui()?;
     let references = get_ref_from_tui()?;
     let educations = get_edu_from_tui()?;
+    let work = get_work_from_tui()?;
     let data = LocalDataBuilder::default()
         .basic(basic)
         .languages(languages)
         .skill(skills)
         .references(references)
         .education(educations)
+        .work(work)
         .build()
         .unwrap();
     Ok(data)
