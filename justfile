@@ -5,3 +5,6 @@ release:
 # release for windows
 release-win:
 	cargo build -r --target x86_64-pc-windows-gnu
+# test
+test:
+	cargo watch -w src -x "nextest r"
