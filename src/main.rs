@@ -58,7 +58,7 @@ fn main() -> anyhow::Result<()> {
     match args.command {
         Commands::Init { name } | Commands::New { name } => {
             let path = get_filename(&name).unwrap();
-            new::new(path)
+            new::new(&path)
         }
         Commands::Gen {
             resume_data_path,
