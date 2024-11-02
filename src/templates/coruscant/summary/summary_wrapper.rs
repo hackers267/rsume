@@ -2,7 +2,7 @@ use crate::templates::coruscant::{
     data_model::supported_resume_data::SupportedResumeData, supported_languages::SupportedLanguages,
 };
 
-// TODO: 添加多语言支持
+/// 创建个人优势
 pub fn build_summary_wrapper(
     resume: &SupportedResumeData,
     _language: &SupportedLanguages,
@@ -10,7 +10,8 @@ pub fn build_summary_wrapper(
     match &resume.basics.summary {
         Some(summary) => {
             let mut str = String::new();
-            str.push_str("<div class='section-title'>自我评价</div>");
+            let title = _language.summary_title();
+            str.push_str(&format!("<div class='section-title'>{}</div>", title));
             str.push_str(&format!(
                 "<section class='entry' style='text-indent:2em'><div class='box-column'>{summary}</div></section>"
             ));

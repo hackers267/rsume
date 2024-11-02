@@ -75,4 +75,11 @@ impl SupportedLanguages {
             SupportedLanguages::CN => "书籍".to_string(),
         }
     }
+    pub fn summary_title(&self) -> String {
+        match self {
+            SupportedLanguages::EN => "PersonalAdvantage".to_string(),
+            SupportedLanguages::DE => "PersönlicherVorteil".to_string(),
+            SupportedLanguages::CN => "个人优势".to_string(),
+        }
+    }
 }
