@@ -6,13 +6,24 @@ mod data;
 #[macro_use]
 mod tui;
 
-fn data_file() -> Option<std::path::PathBuf> {
-    dirs::data_local_dir().map(|path| path.join("rsume/data.yaml"))
+/// 读取数据文件
+///
+/// # Arguments
+/// - **file_name** The file name of the template. 模板文件名
+///
+/// # Return
+/// The absolute path of data template;数据模板文件的完整路径
+fn data_file(file_name: &Path) -> Option<std::path::PathBuf> {
+    dirs::data_local_dir().map(|path| path.join("rsume/").join(file_name))
 }
 
-pub fn new() -> anyhow::Result<()> {
+/// 创建一个新的模板文件
+///
+/// # Arguments
+/// - **path** The path of the source file. 模板文件的文件名称
+pub fn new(path: &Path) -> anyhow::Result<()> {
     let source = include_str!("source.yaml");
-    let data_file = data_file();
+    let data_file = data_file(path);
     match data_file {
         Some(path) if path.exists() => {
             let value = fs::read_to_string(path).unwrap();

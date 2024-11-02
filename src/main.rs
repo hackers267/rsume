@@ -1,5 +1,6 @@
 mod io;
 mod templates;
+mod utils;
 
 use crate::{
     io::{
@@ -15,6 +16,7 @@ use std::{
     path::{Path, PathBuf},
 };
 use templates::template::Template;
+use utils::get_filename;
 
 /// Program for generating a resume from JSONResume data.
 #[derive(Parser, Debug)]
@@ -26,8 +28,14 @@ pub struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-    Init,
-    New,
+    Init {
+        #[arg(short, long, default_value = "data")]
+        name: String,
+    },
+    New {
+        #[arg(short, long, default_value = "data")]
+        name: String,
+    },
     Gen {
         /// Path to the data describing your resume. It needs to comply with theJSONResume schema (see https://jsonresume.org/).
         resume_data_path: PathBuf,
@@ -48,7 +56,10 @@ enum Commands {
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     match args.command {
-        Commands::Init | Commands::New => new::new(),
+        Commands::Init { name } | Commands::New { name } => {
+            let path = get_filename(&name).unwrap();
+            new::new(path)
+        }
         Commands::Gen {
             resume_data_path,
             target_path,
