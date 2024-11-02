@@ -67,3 +67,25 @@ fn create_data_file<'a>(path: &Path, content: &'a str) -> anyhow::Result<&'a str
     }
     Ok(content)
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_data_file() {
+        let path = Path::new("data.yaml");
+        let result = data_file(path);
+        #[cfg(target_os = "linux")]
+        assert!(result
+            .as_ref()
+            .is_some_and(|path| path.ends_with(".local/share/rsume/data.yaml")));
+        #[cfg(target_os = "windows")]
+        assert!(result
+            .as_ref()
+            .is_some_and(|path| path.ends_with("AppData/Roaming/rsume/data.yaml")));
+        #[cfg(target_os = "macos")]
+        assert!(result
+            .is_some_and(|path| path.ends_with("AppData/Application Support/rsume/data.yaml")));
+    }
+}
