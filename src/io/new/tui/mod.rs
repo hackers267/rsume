@@ -69,7 +69,10 @@ pub(super) fn input_prompt(prompt: &str) -> Result<String, dialoguer::Error> {
 /// The selected option by user; 获取用户在列表中的选项
 /// # Arguments
 /// - **prompt** The prompt which tell user to select; 用户提示语
-fn select_prompt(prompt: &str, items: &[&str], length: usize) -> Result<usize, dialoguer::Error> {
+fn select_prompt<T>(prompt: &str, items: &[T], length: usize) -> Result<usize, dialoguer::Error>
+where
+    T: ToString,
+{
     let theme = dialoguer_theme();
     Select::with_theme(&theme)
         .with_prompt(prompt)
