@@ -36,6 +36,7 @@ fn build_entries(project: &Vec<Project>) -> String {
         let features = build_entry_feature(entry);
         let profits = build_entry_profit(entry);
         let desc = build_entry_desc(entry);
+        let other = build_entry_other(entry);
         let entry = Entry {
             desc,
             start_date: entry.start_date.clone(),
@@ -46,11 +47,32 @@ fn build_entries(project: &Vec<Project>) -> String {
             duties,
             features,
             profits,
+            other,
         };
         entries_html.push_str(&build_entry(entry));
     }
 
     entries_html
+}
+
+fn build_entry_other(entry: &Project) -> String {
+    let url = entry.url.as_ref();
+    match url {
+        Some(url) => {
+            format!(
+                r##"
+                    <dl><dt style="
+    font-weight: 700;
+    margin-bottom: 16px;
+">开源地址:</dt><dd style="
+    font-weight: 700;
+"><a href="{url}" target="_blank">{url}
+</a></dd></dl>
+                "##
+            )
+        }
+        None => String::new(),
+    }
 }
 
 pub struct Entry {
@@ -63,6 +85,7 @@ pub struct Entry {
     features: String,
     profits: String,
     desc: String,
+    other: String,
 }
 
 pub fn build_entry(entry: Entry) -> String {
@@ -76,6 +99,7 @@ pub fn build_entry(entry: Entry) -> String {
         features,
         profits,
         desc,
+        other,
     } = entry;
     let rendered_template = render_template(
         include_str!("share.html"),
@@ -88,7 +112,8 @@ pub fn build_entry(entry: Entry) -> String {
             keywords => keywords,
             duties => duties,
             features => features,
-            profits => profits
+            profits => profits,
+            other => other
         ),
     );
 
