@@ -7,7 +7,7 @@ use crate::{
         load_json_resume::load_json_resume, resolve_image_path::resolve_image_path,
         save_to_pdf::save_to_pdf,
     },
-    templates::Coruscant,
+    templates::{Coruscant, Simple},
 };
 use clap::{Parser, Subcommand};
 use io::new;
@@ -99,11 +99,17 @@ pub fn generate_pdf(
         basics.image = resolve_image_path(&resume_data_path, &basics.image);
     }
 
-    let template = match template_enum {
-        AvailableTemplates::Coruscant => Coruscant::new(resume_data, &language).unwrap(),
+    let html_resume = match template_enum {
+        AvailableTemplates::Coruscant => {
+            let template = Coruscant::new(resume_data, &language).unwrap();
+            template.build()
+        }
+        AvailableTemplates::Simple => {
+            let template = Simple::new(resume_data, &language).unwrap();
+            template.build()
+        }
     };
 
-    let html_resume = template.build();
     save_to_html(&html_resume, &target_path)?;
     save_to_pdf(html_resume, &target_path)?;
 
@@ -120,12 +126,14 @@ fn save_to_html(html: &String, target_path: &Path) -> anyhow::Result<()> {
 pub enum AvailableTemplates {
     /// A modern, minimalist, and professional resume design.
     Coruscant,
+    Simple,
 }
 impl AvailableTemplates {
     /// Try constructing a this struct from a string.
     pub fn try_from(template_string: String) -> Result<Self, String> {
         match template_string.to_lowercase().as_str() {
             "coruscant" => Ok(AvailableTemplates::Coruscant),
+            "simple" => Ok(AvailableTemplates::Simple),
             _ => Err(format!("{template_string} is not a supported template.")),
         }
     }
