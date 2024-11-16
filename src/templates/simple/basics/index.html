@@ -1,25 +1,40 @@
-<div class='basics-box'>
-  <div class='default-box'>
-    <div class='basics-wrapper'>
-      <div class='profile-image'>
-        <img src='{{image}}'>
-      </div>
-      <div class='name-and-label'>
-        <div class='name'>
-          {{name}}
+<div class="container">
+  <div class="title">基本信息</div>
+  <div class="horizontal-line"></div>
+  <div class="vertical-line"></div>
+  <div class="content">
+    <div class="basic-wrapper">
+      <div class="basic-list">
+        <div>
+          <span class="basic-label">姓名</span
+          ><span class="basic-symbol">:</span><span>{{name}}</span>
         </div>
-        <div class='label'>
-          {{label}}
+        <div>
+          <span class="basic-label">学历</span
+          ><span class="basic-symbol">:</span><span>{{education}}</span>
+        </div>
+        <div>
+          <span class="basic-label">求职意向</span
+          ><span class="basic-symbol">:</span><span>{{work}}</span>
+        </div>
+        <div>
+          <span class="basic-label">手机</span
+          ><span class="basic-symbol">:</span><span>{{phone}}</span>
+        </div>
+        <div>
+          <span class="basic-label">邮箱</span
+          ><span class="basic-symbol">:</span><span>{{email}}</span>
+        </div>
+        <div>
+          <span class="basic-label">地址</span
+          ><span class="basic-symbol">:</span><span>{{address}}</span>
+        </div>
+        <div>
+          <span class="basic-label">毕业院校</span
+          ><span class="basic-symbol">:</span><span>{{school}}</span>
         </div>
       </div>
-      {{contact_info}}
-    </div>
-    <div class='skills-and-languages-wrapper'>
-      {{languages}}
-      {{skills}}
-    </div>
-    <div class="open-source">
-      {{gits}}
+      <div><img class="basic-img" src="{{image}}" /></div>
     </div>
   </div>
 </div>

@@ -1,14 +1,8 @@
 use minijinja::context;
 
 use crate::templates::simple::{
-    basics::{
-        contact_info::contact_info_wrapper::build_contact_info_wrapper,
-        languages::language_wrapper::build_languages_wrapper, open_source::build_open_source,
-        skills::skills_wrapper::build_skills_wrapper,
-    },
     data_model::supported_resume_data::SupportedResumeData,
-    shared::render_template::render_template,
-    supported_languages::SupportedLanguages,
+    shared::render_template::render_template, supported_languages::SupportedLanguages,
 };
 
 /// Return the basics wrapper as HTML.
@@ -22,10 +16,15 @@ pub fn build_basics_wrapper(
             name => resume_data.basics.name,
             image => resume_data.basics.image,
             label => resume_data.basics.label,
-            contact_info => build_contact_info_wrapper(resume_data),
-            languages => build_languages_wrapper(resume_data, language),
-            skills => build_skills_wrapper(resume_data, language),
-            gits => build_open_source(resume_data,language),
+            email => resume_data.basics.email,
+            phone => resume_data.basics.phone,
+            address => resume_data.basics.location.address,
+            city => resume_data.basics.location.city,
+            postal_code => resume_data.basics.location.postal_code,
+            country_code => resume_data.basics.location.country_code,
+            email_icon => include_str!("icons/email.svg"),
+            phone_icon => include_str!("icons/phone.svg"),
+            address_icon => include_str!("icons/address.svg"),
         ),
     );
 
